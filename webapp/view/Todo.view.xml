@@ -9,27 +9,27 @@
         title="Todo Application"
 		id="page">
 		<content>
-
+            <core:InvisibleText id="firstName-invText" text="First Name"/>
+            <core:InvisibleText id="lastName-invText" text="Last Name"/>
 
             <Panel>
                 <content>
                     <VBox>
-                        <Label text="Title" />
+                        <Label text="Title" labelFor="title" />
                         <Input class="sapUiSmallMarginBottom" id="title"/>
-                        <Label text="Estimate (hours)" />
+                        <Label text="Estimate (hours)" labelFor="estimate" />
                         <Input class="sapUiSmallMarginBottom" id="estimate" />
 
                         <Label text="Assignee" />
                         <HBox>
-                            <Input id="firstName" />
-                            <Input id="lastName" />
+                            <Input id="firstName" ariaLabelledBy="firstName-invText"/>
+                            <Input id="lastName" ariaLabelledBy="lastName-invText"/>
                         </HBox>
 
-                        <Label text="Completed" class="sapUiSmallMarginTop" />
-                        <CheckBox id="completed"/>
+                        <Label text="Completed" class="sapUiSmallMarginTop" labelFor="completed" />
+                        <CheckBox id="completed" />
 
-                        <Label text="Topic" class="sapUiSmallMarginTop" />
-
+                        <Label text="Topic" class="sapUiSmallMarginTop" labelFor="topic"/>
                         <Select id="topic">
                             <items>
                                 <core:Item text="Work" key="Work"/>
