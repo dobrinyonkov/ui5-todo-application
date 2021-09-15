@@ -16,10 +16,10 @@
                 editable="true"
                 layout="ResponsiveGridLayout">
                 <f:content>
-                    <Label text="Title" />
-                    <Input id="title" />
+                    <Label required="true" text="Title" />
+                    <Input id="title" liveChange="validateTitleInput"/>
                     <Label text="Estimate (hours)" />
-                    <Input id="estimate"></Input>
+                    <Input type="Number" id="estimate"></Input>
                     <Label text="Assignee" />
                     <Input id="firstName" ariaLabelledBy="firstName-invText"></Input>
                     <Input id="lastName" ariaLabelledBy="lastName-invText"></Input>

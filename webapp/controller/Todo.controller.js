@@ -16,6 +16,25 @@ sap.ui.define([
 			this.completedCheckBox = this.byId("completed");
 		},
 
+		validateTitleInput: function () {
+			var sValue,
+				oInput = this.titleInput;
+
+			if (oInput) {
+				sValue = oInput.getValue();
+
+				if (sValue.length < 3) {
+					oInput.setValueState(sap.ui.core.ValueState.Error);
+					oInput.setValueStateText("Enter at least 3 characters!");
+				} else {
+					oInput.setValueState(sap.ui.core.ValueState.Success);
+					oInput.setValueStateText("");
+				}
+			}
+
+			return !!sValue
+		},
+
 		resetValues: function() {
 			this.titleInput.setValue("");
 			this.topicSelect.setSelectedKey("Work");
@@ -23,9 +42,18 @@ sap.ui.define([
 			this.firstNameInput.setValue("");
 			this.lastNameInput.setValue("");
 			this.completedCheckBox.setSelected(false);
+
+			this.titleInput.setValueState(sap.ui.core.ValueState.None);
+			this.titleInput.setValueStateText("");
 		},
 
 		handleSavePress: function () {
+			var bValidTitle = this.validateTitleInput();
+
+			if (!bValidTitle) {
+				return;
+			}
+			
 			var sFullName = this.getFullName(),
 				sDescription = this.topicSelect.getSelectedItem().getText();
 
