@@ -1,7 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	'sap/m/StandardListItem',
-], function (Controller, StandardListItem) {
+	'sap/m/Text',
+	'sap/ui/core/Icon',
+	'sap/m/Button',
+	'sap/m/ButtonType',
+	'sap/m/Dialog',
+	'sap/m/DialogType',
+], function (Controller, StandardListItem, Text, Icon, Button, ButtonType, Dialog, DialogType) {
 	"use strict";
 
 	return Controller.extend("todo.controller.Todo", {
@@ -21,21 +27,21 @@ sap.ui.define([
 				oInput = this.titleInput;
 
 			if (oInput) {
-				sValue = oInput.getValue();
+				sValue = oInput.getValue().length > 3;
 
-				if (sValue.length < 3) {
-					oInput.setValueState(sap.ui.core.ValueState.Error);
-					oInput.setValueStateText("Enter at least 3 characters!");
-				} else {
+				if (sValue) {
 					oInput.setValueState(sap.ui.core.ValueState.Success);
 					oInput.setValueStateText("");
+				} else {
+					oInput.setValueState(sap.ui.core.ValueState.Error);
+					oInput.setValueStateText("Enter at least 3 characters!");
 				}
 			}
 
 			return !!sValue
 		},
 
-		resetValues: function() {
+		resetValues: function () {
 			this.titleInput.setValue("");
 			this.topicSelect.setSelectedKey("Work");
 			this.estimateInput.setValue("");
@@ -47,13 +53,7 @@ sap.ui.define([
 			this.titleInput.setValueStateText("");
 		},
 
-		handleSavePress: function () {
-			var bValidTitle = this.validateTitleInput();
-
-			if (!bValidTitle) {
-				return;
-			}
-			
+		onApprove: function () {
 			var sFullName = this.getFullName(),
 				sDescription = this.topicSelect.getSelectedItem().getText();
 
@@ -62,13 +62,54 @@ sap.ui.define([
 			}
 
 			this.list.addItem(new StandardListItem({
-				selected: this.completedCheckBox.getSelected(),
 				title: this.titleInput.getValue(),
 				description: sDescription,
 				counter: parseInt(this.estimateInput.getValue())
 			}));
+		},
 
-			this.resetValues();
+		handleSavePress: function () {
+			var bValidTitle = this.validateTitleInput();
+
+			if (!bValidTitle) {
+				return;
+			}
+
+			this.getApproveDialog().open();
+		},
+
+		getApproveDialog: function () {
+			var sMessage;
+			if (!this.oApproveDialog) {
+				sMessage = "New Todo was saved!";
+
+				this.oApproveDialog = new Dialog({
+					type: DialogType.Message,
+					title: "Confirm",
+					content: [
+						new Icon({ src: "sap-icon://accept", size: "18px" }).addStyleClass("sapUiTinyMargin"),
+						new Text({ text: "Do you want to submit this todo?" })
+					],
+					beginButton: new Button({
+						type: ButtonType.Emphasized,
+						text: "Submit",
+						press: function () {
+							this.onApprove();
+							this.resetValues();
+
+							this.oApproveDialog.close();
+						}.bind(this)
+					}),
+					endButton: new Button({
+						text: "Cancel",
+						press: function () {
+							this.oApproveDialog.close();
+						}.bind(this)
+					})
+				});
+			}
+
+			return this.oApproveDialog;
 		},
 
 
