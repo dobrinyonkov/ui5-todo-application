@@ -1,0 +1,56 @@
+<mvc:View
+	controllerName="todo.controller.Todo"
+	xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+        title="Todo Application"
+		id="page">
+		<content>
+
+
+            <Panel>
+                <content>
+                    <VBox>
+                        <Label text="Title" />
+                        <Input class="sapUiSmallMarginBottom" id="title"/>
+                        <Label text="Estimate (hours)" />
+                        <Input class="sapUiSmallMarginBottom" id="estimate" />
+
+                        <Label text="Assignee" />
+                        <HBox>
+                            <Input id="firstName" />
+                            <Input id="lastName" />
+                        </HBox>
+
+                        <Label text="Completed" class="sapUiSmallMarginTop" />
+                        <CheckBox id="completed"/>
+
+                        <Label text="Topic" class="sapUiSmallMarginTop" />
+
+                        <Select id="topic">
+                            <items>
+                                <core:Item text="Work" key="Work"/>
+                                <core:Item text="Life" key="Life"/>
+                                <core:Item text="Other" key="Other"/>
+                            </items>
+                        </Select>
+                    </VBox>
+                </content>
+            </Panel>
+
+            <Toolbar>
+                <ToolbarSpacer></ToolbarSpacer>
+                <Button text="Add Todo" press="handleSavePress"/>
+            </Toolbar>
+          
+            <List
+                id="list"
+                mode="MultiSelect"
+                headerText="Todos">
+            </List>
+		</content>
+	</Page>
+</mvc:View>
