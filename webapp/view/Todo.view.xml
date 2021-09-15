@@ -12,34 +12,31 @@
             <core:InvisibleText id="firstName-invText" text="First Name"/>
             <core:InvisibleText id="lastName-invText" text="Last Name"/>
 
-            <Panel>
-                <content>
-                    <VBox>
-                        <Label text="Title" labelFor="title" />
-                        <Input class="sapUiSmallMarginBottom" id="title"/>
-                        <Label text="Estimate (hours)" labelFor="estimate" />
-                        <Input class="sapUiSmallMarginBottom" id="estimate" />
+            <f:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout">
+                <f:content>
+                    <Label text="Title" />
+                    <Input id="title" />
+                    <Label text="Estimate (hours)" />
+                    <Input id="estimate"></Input>
+                    <Label text="Assignee" />
+                    <Input id="firstName" ariaLabelledBy="firstName-invText"></Input>
+                    <Input id="lastName" ariaLabelledBy="lastName-invText"></Input>
 
-                        <Label text="Assignee" />
-                        <HBox>
-                            <Input id="firstName" ariaLabelledBy="firstName-invText"/>
-                            <Input id="lastName" ariaLabelledBy="lastName-invText"/>
-                        </HBox>
+                    <Label text="Completed" />
+                    <CheckBox id="completed" />
 
-                        <Label text="Completed" class="sapUiSmallMarginTop" labelFor="completed" />
-                        <CheckBox id="completed" />
-
-                        <Label text="Topic" class="sapUiSmallMarginTop" labelFor="topic"/>
-                        <Select id="topic">
-                            <items>
-                                <core:Item text="Work" key="Work"/>
-                                <core:Item text="Life" key="Life"/>
-                                <core:Item text="Other" key="Other"/>
-                            </items>
-                        </Select>
-                    </VBox>
-                </content>
-            </Panel>
+                    <Label text="Topic" />
+                    <Select id="topic">
+                        <items>
+                            <core:Item text="Work" key="Work"/>
+                            <core:Item text="Life" key="Life"/>
+                            <core:Item text="Other" key="Other"/>
+                        </items>
+                    </Select>
+                </f:content>
+            </f:SimpleForm>
 
             <Toolbar>
                 <ToolbarSpacer></ToolbarSpacer>
