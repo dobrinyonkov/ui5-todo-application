@@ -87,9 +87,10 @@ sap.ui.define([
 					type: DialogType.Message,
 					title: "Confirm",
 					content: [
-						new Icon({ src: "sap-icon://accept", size: "18px" }).addStyleClass("sapUiTinyMargin"),
-						new Text({ text: "Do you want to submit this todo?" })
+						new Icon("__dialogIcon", { src: "sap-icon://accept", size: "18px" }).addStyleClass("sapUiTinyMargin"),
+						new Text("__dialogText", { text: "Do you want to submit this todo?" })
 					],
+					ariaDescribedBy: ["__dialogIcon", "__dialogText"],
 					beginButton: new Button({
 						type: ButtonType.Emphasized,
 						text: "Submit",
