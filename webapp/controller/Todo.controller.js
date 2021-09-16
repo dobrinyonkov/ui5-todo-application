@@ -8,7 +8,8 @@ sap.ui.define([
 	'sap/m/Dialog',
 	'sap/m/DialogType',
 	'sap/m/MessageToast',
-], function (Controller, StandardListItem, Text, Icon, Button, ButtonType, Dialog, DialogType, MessageToast) {
+	'sap/m/MessageStrip',
+], function (Controller, StandardListItem, Text, Icon, Button, ButtonType, Dialog, DialogType, MessageToast, MessageStrip) {
 	"use strict";
 
 	return Controller.extend("todo.controller.Todo", {
@@ -90,6 +91,7 @@ sap.ui.define([
 			var bValidTitle = this.validateTitleInput();
 
 			if (!bValidTitle) {
+				this.generateMsgStrip();
 				return;
 			}
 
@@ -115,7 +117,7 @@ sap.ui.define([
 						press: function () {
 							this.onApprove();
 							this.resetValues();
-							
+
 							MessageToast.show(sMessage);
 
 							this.oApproveDialog.close();
@@ -169,6 +171,22 @@ sap.ui.define([
 			}
 
 			return this.oDeleteDialog;
+		},
+
+		generateMsgStrip: function () {
+			var sText = "Please make sure the form is valid!",
+				oPlaceHolder = this.byId("page"),
+				oMsgStrip = new MessageStrip("msgStrip", {
+					text: sText,
+					type: "Error"
+				}).addStyleClass("sapUiTinyMargin");
+
+			oPlaceHolder.addContent(oMsgStrip);
+
+			setTimeout(function (){
+				oPlaceHolder.removeContent(oMsgStrip);
+				oMsgStrip.destroy();
+			}, 5000)
 		},
 
 		getFullName: function () {
