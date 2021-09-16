@@ -68,6 +68,23 @@ sap.ui.define([
 			}));
 		},
 
+		onDelete() {
+			if (this._itemToDelete) {
+				// after deletion put the focus back to the list
+				this.list.attachEventOnce("updateFinished", this.list.focus, this.list);
+				
+				// delete
+				this.list.removeItem(this._itemToDelete);
+				this._itemToDelete = null
+			}
+		},
+
+		handleDeletePress: function(oEvent) {
+			this._itemToDelete = oEvent.getParameter("listItem");
+
+			this.getDeleteDialog().open();
+		},
+
 		handleSavePress: function () {
 			var bValidTitle = this.validateTitleInput();
 
@@ -112,7 +129,40 @@ sap.ui.define([
 
 			return this.oApproveDialog;
 		},
+		
+		getDeleteDialog: function () {
+			if (!this.oDeleteDialog) {
 
+				this.oDeleteDialog = new Dialog({
+					type: DialogType.Message,
+					title: "Confirm",
+					content: [
+						new Icon("__deleteDialogIcon", { src: "sap-icon://delete", size: "18px" }).addStyleClass("sapUiTinyMargin"),
+						new Text("__deleteDialogText", { text: "Do you want to delete this todo?" })
+					],
+					ariaDescribedBy: ["__dialogIcon", "__dialogText"],
+					beginButton: new Button({
+						icon:"sap-icon://accept",
+						type: ButtonType.Icon,
+						press: function () {
+							this.onDelete();
+							this.resetValues();
+
+							this.oDeleteDialog.close();
+						}.bind(this)
+					}),
+					endButton: new Button({
+						type: ButtonType.Icon,
+						icon:"sap-icon://decline",
+						press: function () {
+							this.oDeleteDialog.close();
+						}.bind(this)
+					})
+				});
+			}
+
+			return this.oDeleteDialog;
+		},
 
 		getFullName: function () {
 			var firsName = this.firstNameInput.getValue(),
