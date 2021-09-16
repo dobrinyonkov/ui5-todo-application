@@ -7,7 +7,8 @@ sap.ui.define([
 	'sap/m/ButtonType',
 	'sap/m/Dialog',
 	'sap/m/DialogType',
-], function (Controller, StandardListItem, Text, Icon, Button, ButtonType, Dialog, DialogType) {
+	'sap/m/MessageToast',
+], function (Controller, StandardListItem, Text, Icon, Button, ButtonType, Dialog, DialogType, MessageToast) {
 	"use strict";
 
 	return Controller.extend("todo.controller.Todo", {
@@ -114,6 +115,8 @@ sap.ui.define([
 						press: function () {
 							this.onApprove();
 							this.resetValues();
+							
+							MessageToast.show(sMessage);
 
 							this.oApproveDialog.close();
 						}.bind(this)
@@ -131,7 +134,9 @@ sap.ui.define([
 		},
 		
 		getDeleteDialog: function () {
+			var sMessage;
 			if (!this.oDeleteDialog) {
+				sMessage = "Todo was deleted!";
 
 				this.oDeleteDialog = new Dialog({
 					type: DialogType.Message,
@@ -147,6 +152,8 @@ sap.ui.define([
 						press: function () {
 							this.onDelete();
 							this.resetValues();
+
+							MessageToast.show(sMessage);
 
 							this.oDeleteDialog.close();
 						}.bind(this)
