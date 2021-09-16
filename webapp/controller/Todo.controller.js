@@ -9,8 +9,12 @@ sap.ui.define([
 	'sap/m/DialogType',
 	'sap/m/MessageToast',
 	'sap/m/MessageStrip',
-], function (Controller, StandardListItem, Text, Icon, Button, ButtonType, Dialog, DialogType, MessageToast, MessageStrip) {
+	'sap/ui/core/InvisibleMessage',
+	'sap/ui/core/library',
+], function (Controller, StandardListItem, Text, Icon, Button, ButtonType, Dialog, DialogType, MessageToast, MessageStrip, InvisibleMessage, library) {
 	"use strict";
+
+	var InvisibleMessageMode = library.InvisibleMessageMode;
 
 	return Controller.extend("todo.controller.Todo", {
 		onInit() {
@@ -22,6 +26,8 @@ sap.ui.define([
 			this.topicSelect = this.byId("topic");
 			this.estimateInput = this.byId("estimate");
 			this.completedCheckBox = this.byId("completed");
+
+			this.oInvisibleMessage = InvisibleMessage.getInstance();
 		},
 
 		validateTitleInput: function () {
@@ -182,6 +188,7 @@ sap.ui.define([
 				}).addStyleClass("sapUiTinyMargin");
 
 			oPlaceHolder.addContent(oMsgStrip);
+			this.oInvisibleMessage.announce(sText, InvisibleMessageMode.Assertive);
 
 			setTimeout(function (){
 				oPlaceHolder.removeContent(oMsgStrip);
