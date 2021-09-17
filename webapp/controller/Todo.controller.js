@@ -187,7 +187,7 @@ sap.ui.define([
 					type: "Error"
 				}).addStyleClass("sapUiTinyMargin");
 
-			oPlaceHolder.addContent(oMsgStrip);
+			oPlaceHolder.insertContent(oMsgStrip, 0);
 			this.oInvisibleMessage.announce(sText, InvisibleMessageMode.Assertive);
 
 			setTimeout(function (){
