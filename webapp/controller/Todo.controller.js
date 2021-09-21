@@ -97,10 +97,7 @@ sap.ui.define([
 		},
 
 		getApproveDialog: function () {
-			var sMessage;
 			if (!this.oApproveDialog) {
-				sMessage = "New Todo was saved!";
-
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
 					title: "Confirm",
@@ -115,8 +112,8 @@ sap.ui.define([
 						press: function () {
 							this.onApprove();
 							this.resetValues();
-							
-							MessageToast.show(sMessage);
+
+							MessageToast.show("New Todo was saved!");
 
 							this.oApproveDialog.close();
 						}.bind(this)
@@ -134,10 +131,7 @@ sap.ui.define([
 		},
 		
 		getDeleteDialog: function () {
-			var sMessage;
 			if (!this.oDeleteDialog) {
-				sMessage = "Todo was deleted!";
-
 				this.oDeleteDialog = new Dialog({
 					type: DialogType.Message,
 					title: "Confirm",
@@ -145,17 +139,15 @@ sap.ui.define([
 						new Icon("__deleteDialogIcon", { src: "sap-icon://delete", size: "18px" }).addStyleClass("sapUiTinyMargin"),
 						new Text("__deleteDialogText", { text: "Do you want to delete this todo?" })
 					],
-					ariaDescribedBy: ["__dialogIcon", "__dialogText"],
+					ariaDescribedBy: ["__deleteDialogText"],
 					beginButton: new Button({
 						icon:"sap-icon://accept",
 						type: sap.m.ButtonType.Accept,
 						press: function () {
 							this.onDelete();
-							this.resetValues();
-
-							MessageToast.show(sMessage);
-
 							this.oDeleteDialog.close();
+
+							MessageToast.show("Todo was deleted!");
 						}.bind(this)
 					}),
 					endButton: new Button({
