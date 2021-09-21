@@ -156,7 +156,7 @@ sap.ui.define([
 					ariaDescribedBy: ["__dialogIcon", "__dialogText"],
 					beginButton: new Button({
 						icon:"sap-icon://accept",
-						type: sap.m.ButtonType.Accept,
+						type: ButtonType.Icon,
 						press: function () {
 							this.onDelete();
 							this.resetValues();
@@ -167,7 +167,7 @@ sap.ui.define([
 						}.bind(this)
 					}),
 					endButton: new Button({
-						type: sap.m.ButtonType.Reject,
+						type: ButtonType.Icon,
 						icon:"sap-icon://decline",
 						press: function () {
 							this.oDeleteDialog.close();
