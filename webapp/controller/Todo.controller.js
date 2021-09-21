@@ -153,17 +153,15 @@ sap.ui.define([
 						new Icon("__deleteDialogIcon", { src: "sap-icon://delete", size: "18px" }).addStyleClass("sapUiTinyMargin"),
 						new Text("__deleteDialogText", { text: "Do you want to delete this todo?" })
 					],
-					ariaDescribedBy: ["__dialogIcon", "__dialogText"],
+					ariaDescribedBy: ["__deleteDialogText"],
 					beginButton: new Button({
 						icon:"sap-icon://accept",
 						type: sap.m.ButtonType.Accept,
 						press: function () {
 							this.onDelete();
-							this.resetValues();
+							this.oDeleteDialog.close();
 
 							MessageToast.show(sMessage);
-
-							this.oDeleteDialog.close();
 						}.bind(this)
 					}),
 					endButton: new Button({
