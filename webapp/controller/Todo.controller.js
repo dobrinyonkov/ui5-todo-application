@@ -161,7 +161,7 @@ sap.ui.define([
 							this.onDelete();
 							this.oDeleteDialog.close();
 
-              						MessageToast.show(sMessage);
+							MessageToast.show(sMessage);
 						}.bind(this)
 					}),
 					endButton: new Button({
