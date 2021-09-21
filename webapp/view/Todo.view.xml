@@ -8,15 +8,6 @@
 	<Page
 		title="Todo Application"
 		id="page">
-		<landmarkInfo>
-				<PageAccessibleLandmarkInfo
-						rootRole="Region"
-						rootLabel="Todo Application"
-						contentRole="Main"
-						contentLabel="Todos List and Creation Form"
-						headerRole="Region"
-						headerLabel="Todo Application Header"/>
-		</landmarkInfo>
 		<content>
 			<core:InvisibleText id="firstName-invText" text="First Name"/>
 			<core:InvisibleText id="lastName-invText" text="Last Name"/>
