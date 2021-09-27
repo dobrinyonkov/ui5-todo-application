@@ -21,14 +21,14 @@ sap.ui.define([
 				oInput = this.titleInput;
 
 			if (oInput) {
-				sValue = oInput.getValue();
+				sValue = oInput.getValue().length >= 3;
 
-				if (sValue.length < 3) {
-					oInput.setValueState(sap.ui.core.ValueState.Error);
-					oInput.setValueStateText("Enter at least 3 characters!");
-				} else {
+				if (sValue) {
 					oInput.setValueState(sap.ui.core.ValueState.Success);
 					oInput.setValueStateText("");
+				} else {
+					oInput.setValueState(sap.ui.core.ValueState.Error);
+					oInput.setValueStateText("Enter at least 3 characters!");
 				}
 			}
 
