@@ -28,7 +28,7 @@ sap.ui.define([
 				oInput = this.titleInput;
 
 			if (oInput) {
-				sValue = oInput.getValue().length > 3;
+				sValue = oInput.getValue().length >= 3;
 
 				if (sValue) {
 					oInput.setValueState(sap.ui.core.ValueState.Success);
