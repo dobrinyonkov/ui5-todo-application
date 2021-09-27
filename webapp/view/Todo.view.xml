@@ -1,53 +1,63 @@
 <mvc:View
 	controllerName="todo.controller.Todo"
 	xmlns="sap.m"
-    xmlns:l="sap.ui.layout"
+	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"
+	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc">
 	<Page
-        title="Todo Application"
+		title="Todo Application"
 		id="page">
+		<landmarkInfo>
+				<PageAccessibleLandmarkInfo
+						rootRole="Region"
+						rootLabel="Todo Application"
+						contentRole="Main"
+						contentLabel="Todos List and Creation Form"
+						headerRole="Region"
+						headerLabel="Todo Application Header"/>
+		</landmarkInfo>
 		<content>
-            <core:InvisibleText id="firstName-invText" text="First Name"/>
-            <core:InvisibleText id="lastName-invText" text="Last Name"/>
+			<core:InvisibleText id="firstName-invText" text="First Name"/>
+			<core:InvisibleText id="lastName-invText" text="Last Name"/>
 
-            <f:SimpleForm
-                editable="true"
-                layout="ResponsiveGridLayout">
-                <f:content>
-                    <Label required="true" text="Title" />
-                    <Input id="title" liveChange="validateTitleInput"/>
-                    <Label text="Estimate (hours)" />
-                    <Input type="Number" id="estimate"></Input>
-                    <Label text="Assignee" />
-                    <Input id="firstName" ariaLabelledBy="firstName-invText"></Input>
-                    <Input id="lastName" ariaLabelledBy="lastName-invText"></Input>
+			<f:SimpleForm
+				editable="true"
+				layout="ResponsiveGridLayout">
+				<f:content>
+					<Label required="true" text="Title" />
+					<Input id="title" liveChange="validateTitleInput"/>
+					<Label text="Estimate (hours)" />
+					<Input type="Number" id="estimate"></Input>
+					<Label text="Assignee" />
+					<Input id="firstName" ariaLabelledBy="firstName-invText"></Input>
+					<Input id="lastName" ariaLabelledBy="lastName-invText"></Input>
 
-                    <Label text="Completed" />
-                    <CheckBox id="completed" />
+					<Label text="Completed" />
+					<CheckBox id="completed" />
 
-                    <Label text="Topic" />
-                    <Select id="topic">
-                        <items>
-                            <core:Item text="Work" key="Work"/>
-                            <core:Item text="Life" key="Life"/>
-                            <core:Item text="Other" key="Other"/>
-                        </items>
-                    </Select>
-                </f:content>
-            </f:SimpleForm>
+					<Label text="Topic" />
+					<Select id="topic">
+						<items>
+							<core:Item text="Work" key="Work"/>
+							<core:Item text="Life" key="Life"/>
+							<core:Item text="Other" key="Other"/>
+						</items>
+					</Select>
+				</f:content>
+			</f:SimpleForm>
 
-            <Toolbar>
-                <ToolbarSpacer></ToolbarSpacer>
-                <Button text="Add Todo" press="handleSavePress"/>
-            </Toolbar>
-          
-            <List
-                id="list"
-                mode="MultiSelect"
-                headerText="Todos">
-            </List>
+			<Toolbar>
+				<ToolbarSpacer></ToolbarSpacer>
+				<Button text="Add Todo" press="handleSavePress"/>
+			</Toolbar>
+		  
+			<List
+				id="list"
+				mode="Delete"
+				delete="handleDeletePress"
+				headerText="Todos">
+			</List>
 		</content>
 	</Page>
 </mvc:View>
