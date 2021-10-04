@@ -7,6 +7,7 @@
 	xmlns:mvc="sap.ui.core.mvc">
 	<Page
         title="Todo Application"
+		titleLevel="H1"
 		id="page">
 		<content>
             <core:InvisibleText id="firstName-invText" text="First Name"/>
